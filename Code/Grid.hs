@@ -8,16 +8,19 @@ gridPrint
 import Data.List
 
 data Space = Space { coords :: (Int,Int), cars:: Int, kind :: Char, direction :: [Char] }
+--coords are the coordinates (y,x not x,y), cars states the number of cars on the space, kind is the type of space ( r = regular road, s = stop sign, i = intersection, g = grass), direction is a list of possible movements from that space.
 
-update :: [(Int,Int)] -> [[Space]] -> [[Space]]
+update :: [(Int,Int)] -> [[Space]] -> [[Space]] -- updates cars in grid 
 update cars grid = [[ Space (coords y) (length $ (coords y) `elemIndices` cars) (kind y) (direction y) | y <- x] | x <- grid]
 
-gridPrint grid = order ([ unwords [ if cars y > 0 then "x" else (if kind y == 'G' then "G" else "/")| y <- x] | x <- grid]) []
+gridPrint :: [[Space]] -> [[Char]] -- will be removed when we have a regular display
+gridPrint grid = order ([ unwords [ if cars y > 0 then (if cars y == 1 then "x" else "C") else (if kind y == 'G' then "G" else "/")| y <- x] | x <- grid]) []
 
-order :: [[Char]] -> [[Char]] -> [[Char]]
+order :: [[Char]] -> [[Char]] -> [[Char]] --will be removed when we have a regular display
 order [] new = new
 order (x:xs) new = order xs (x:new)
 
+--This is the grid being used. 14x14 box with two lines cutting through the middle and creating a four-way intersection in the center. Can be replaced with a new one for a different design.
 grid = [[ Space (0,0) 0 'I' ['E'], Space (0,1) 0 'I' ['E'], Space (0,2) 0 'R' ['E'], Space (0,3) 0 'R' ['E'], Space (0,4) 0 'R' ['E'], Space (0,5) 0 'S' ['E'], Space (0,6) 0 'I' ['E'], Space (0,7) 0 'I' ['N','E'], Space (0,8) 0 'R' ['E'], Space (0,9) 0 'R' ['E'], Space (0,10) 0 'R' ['E'], Space (0,11) 0 'S' ['E'], Space (0,12) 0 'I' ['E'], Space (0,13) 0 'I' ['N']],
 		[ Space (1,0) 0 'I' ['S'], Space (1,1) 0 'I' ['N'], Space (1,2) 0 'S' ['W'], Space (1,3) 0 'R' ['W'], Space (1,4) 0 'R' ['W'], Space (1,5) 0 'R' ['W'], Space (1,6) 0 'I' ['S', 'W'], Space (1,7) 0 'I' ['N','W'], Space (1,8) 0 'S' ['W'], Space (1,9) 0 'R' ['W'], Space (1,10) 0 'R' ['W'], Space (1,11) 0 'R' ['W'], Space (1,12) 0 'I' ['W'], Space (1,13) 0 'I' ['N']],
 		[ Space (2,0) 0 'S' ['S'], Space (2,1) 0 'R' ['N'], Space (2,2) 0 'G' ['G'], Space (2,3) 0 'G' ['G'], Space (2,4) 0 'G' ['G'], Space (2,5) 0 'G' ['G'], Space (2,6) 0 'S' ['S'], Space (2,7) 0 'R' ['N'], Space (2,8) 0 'G' ['G'], Space (2,9) 0 'G' ['G'], Space (2,10) 0 'G' ['G'], Space (2,11) 0 'G' ['G'], Space (2,12) 0 'S' ['S'], Space (2,13) 0 'R' ['N']],
