@@ -1,4 +1,9 @@
-data Space = { coords :: (Int,Int), cars:: Int, kind :: Char, direction :: Char }
+module Grid(
+Space(..),
+grid
+) where
+
+data Space = Space { coords :: (Int,Int), cars:: Int, kind :: Char, direction :: Char }
 
 grid = [[ Space (0,0) 0 'I' 'E', Space (0,1) 0 'I' 'E', Space (0,2) 0 'S' 'E', Space (0,3) 0 'R' 'E', Space (0,4) 0 'R' 'E', Space (0,5) 0 'I' 'E', Space (0,6) 0 'I' 'N'],
 		[ Space (1,0) 0 'I' 'S', Space (1,1) 0 'I' 'N', Space (1,2) 0 'R' 'W', Space (1,3) 0 'R' 'W', Space (1,4) 0 'S' 'W', Space (1,5) 0 'I' 'W', Space (1,6) 0 'I' 'N'],
