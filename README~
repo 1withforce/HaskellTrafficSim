@@ -1,10 +1,4 @@
 This is a git repository for a programming II group project at New College of Florida
-Developers:
-Sara Oldham: Haskell programming
-Aaron Olinger: Interface/display and planning
-	--also repo owner
-
 Version 1.0 is complete!
-
 
 There is currently a rudimentary display that uses the terminal. I'm working towards making a proper display using either glade or cairo from gtk2hs.
